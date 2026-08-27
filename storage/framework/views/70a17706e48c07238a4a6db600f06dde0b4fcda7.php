@@ -1,0 +1,290 @@
+<!-- Stored in resources/views/child.blade.php -->
+
+<!-- Sidebar -->
+<div class="sidebar sidebar-style-2" data-background-color="<?php echo e(Auth('admin')->User()->dashboard_style); ?>">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <div class="user">
+                <div class="info">
+                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                        <span>
+                            <?php echo e(Auth('admin')->User()->firstName); ?> <?php echo e(Auth('admin')->User()->lastName); ?>
+
+                            <span class="user-level"> Admin</span>
+                            
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <ul class="nav nav-primary">
+                <li class="nav-item <?php echo e(request()->routeIs('admin.dashboard') ? 'active' : ''); ?>">
+                    <a href="<?php echo e(url('/admin/dashboard')); ?>">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+ <li
+                        class="nav-item <?php echo e(request()->routeIs('manageusers') ? 'active' : ''); ?> <?php echo e(request()->routeIs('loginactivity') ? 'active' : ''); ?> <?php echo e(request()->routeIs('user.plans') ? 'active' : ''); ?> <?php echo e(request()->routeIs('viewuser') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(url('/admin/dashboard/manageusers')); ?>">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                            <p>Manage Users</p>
+                        </a>
+                    </li>
+
+                
+                    <li class="nav-item <?php echo e(request()->routeIs('admin.createnewuser') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('createnewuser')); ?>">
+                            <i class="fas fa-user"></i>
+                            <p>Create New user</p>
+                        </a>
+                    </li>
+
+                <li
+                class="nav-item <?php echo e(request()->routeIs('kyc') ? 'active' : ''); ?> <?php echo e(request()->routeIs('viewkyc') ? 'active' : ''); ?>">
+                <a href="<?php echo e(route('kyc')); ?>">
+                    <i class="fa fa-user-check" aria-hidden="true"></i>
+                    <p>New User Application(s)</p>
+                </a>
+            </li>
+            
+                <li
+                        class="nav-item <?php echo e(request()->routeIs('mwithdrawals') ? 'active' : ''); ?>   <?php echo e(request()->routeIs('processwithdraw') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(url('/admin/dashboard/mwithdrawals')); ?>">
+                            <i class="fa fa-arrow-alt-circle-up" aria-hidden="true"></i>
+                            <p>Transfer Transactions</p>
+                        </a>
+                    </li>
+
+                    <li
+                        class="nav-item <?php echo e(request()->routeIs('mdeposits') ? 'active' : ''); ?> <?php echo e(request()->routeIs('viewdepositimage') ? 'active' : ''); ?> <?php echo e(request()->routeIs('mdeposits') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(url('/admin/dashboard/mdeposits')); ?>">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            <p>Users Deposits</p>
+                        </a>
+                    </li>
+                <?php if(Auth('admin')->User()->type == 'Super Admin' || Auth('admin')->User()->type == 'Admin'): ?>
+                    <li
+                        class="nav-item <?php echo e(request()->routeIs('plans') ? 'active' : ''); ?> <?php echo e(request()->routeIs('newplan') ? 'active' : ''); ?> <?php echo e(request()->routeIs('editplan') ? 'active' : ''); ?> <?php echo e(request()->routeIs('activeinvestments') ? 'active' : ''); ?>">
+                        <a data-toggle="collapse" href="#pln">
+                            <i class="fas fa-cubes "></i>
+                            <p>Loan Applications</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="pln">
+                            <ul class="nav nav-collapse">
+                                
+                                <li>
+                                    <a href="<?php echo e(url('/admin/dashboard/active-investments')); ?>">
+                                        <span class="sub-item">Active loans</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li
+                        class="nav-item <?php echo e(request()->routeIs('admin.cards') ? 'active' : ''); ?> <?php echo e(request()->routeIs('admin.card.view') ? 'active' : ''); ?>">
+                        <a data-toggle="collapse" href="#vcards">
+                            <i class="fas fa-credit-card"></i>
+                            <p>Virtual Cards</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="vcards">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="<?php echo e(route('admin.cards')); ?>">
+                                        <span class="sub-item">All Cards</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('admin.cards.pending')); ?>">
+                                        <span class="sub-item">Pending Applications</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('admin.cards.settings')); ?>">
+                                        <span class="sub-item">Card Settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item <?php echo e(request()->routeIs('admin.irs-refunds.*') ? 'active' : ''); ?>">
+                        <a data-toggle="collapse" href="#irsrefunds">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <p>IRS Refunds</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="irsrefunds">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="<?php echo e(route('admin.irs-refunds.index')); ?>">
+                                        <span class="sub-item">All Refunds</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('admin.irs-refunds.pending')); ?>">
+                                        <span class="sub-item">Pending Refunds</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('admin.irs-refunds.settings')); ?>">
+                                        <span class="sub-item">Refund Settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item <?php echo e(request()->routeIs('emailservices') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('emailservices')); ?>">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <p>Email Services</p>
+                        </a>
+                    </li>
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+                    <li
+                        class="nav-item <?php echo e(request()->routeIs('signals') ? 'active' : ''); ?> <?php echo e(request()->routeIs('signal.settings') ? 'active' : ''); ?> <?php echo e(request()->routeIs('signal.subs') ? 'active' : ''); ?>">
+                        <!--<a data-toggle="collapse" href="#signals">-->
+                        <!--    <i class="fa fa-signal"></i>-->
+                        <!--    <p>Signal Provider</p>-->
+                        <!--    <span class="caret"></span>-->
+                        <!--</a>-->
+                        <div class="collapse" id="signals">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="<?php echo e(route('signals')); ?>">
+                                        <span class="sub-item">Trade Signals</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('signal.subs')); ?>">
+                                        <span class="sub-item">Subscribers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('signal.settings')); ?>">
+                                        <span class="sub-item">Settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li
+                        class="nav-item <?php echo e(request()->routeIs('categories') ? 'active' : ''); ?> <?php echo e(request()->routeIs('courses') ? 'active' : ''); ?> <?php echo e(request()->routeIs('lessons') ? 'active' : ''); ?>">
+                        <!--<a data-toggle="collapse" href="#meme">-->
+                        <!--    <i class="fa fa-book-reader"></i>-->
+                        <!--    <p>Membership</p>-->
+                        <!--    <span class="caret"></span>-->
+                        <!--</a>-->
+                        <div class="collapse" id="meme">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="<?php echo e(route('categories')); ?>">
+                                        <span class="sub-item">Categories</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('courses')); ?>">
+                                        <span class="sub-item">Courses</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(route('less.nocourse')); ?>">
+                                        <span class="sub-item">Lessons</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                
+                
+                <?php if(Auth('admin')->User()->type == 'Super Admin'): ?>
+                    <li
+                        class="nav-item <?php echo e(request()->routeIs('addmanager') ? 'active' : ''); ?> <?php echo e(request()->routeIs('madmin') ? 'active' : ''); ?>">
+                        <a data-toggle="collapse" href="#adm">
+                            <i class="fa fa-user"></i>
+                            <p>Administrator(s)</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="adm">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="<?php echo e(url('/admin/dashboard/addmanager')); ?>">
+                                        <span class="sub-item">Add Manager</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo e(url('/admin/dashboard/madmin')); ?>">
+                                        <span class="sub-item">Manage Admin(s)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li
+                        class="nav-item <?php echo e(request()->routeIs('appsettingshow') ? 'active' : ''); ?> <?php echo e(request()->routeIs('termspolicy') ? 'active' : ''); ?> <?php echo e(request()->routeIs('refsetshow') ? 'active' : ''); ?> <?php echo e(request()->routeIs('paymentview') ? 'active' : ''); ?> <?php echo e(request()->routeIs('subview') ? 'active' : ''); ?> <?php echo e(request()->routeIs('frontpage') ? 'active' : ''); ?> <?php echo e(request()->routeIs('allipaddress') ? 'active' : ''); ?> <?php echo e(request()->routeIs('ipaddress') ? 'active' : ''); ?> <?php echo e(request()->routeIs('editpaymethod') ? 'active' : ''); ?> <?php echo e(request()->routeIs('managecryptoasset') ? 'active' : ''); ?>">
+                        <a data-toggle="collapse" href="#settings">
+                            <i class="fa fa-cog"></i>
+                            <p>Settings</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="settings">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="<?php echo e(route('appsettingshow')); ?>">
+                                        <span class="sub-item">App Settings</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo e(route('paymentview')); ?>">
+                                        <span class="sub-item">Payment Settings</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo e(route('admin.appearance')); ?>">
+                                        <span class="sub-item">Appearance Settings</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo e(url('/admin/dashboard/ipaddress')); ?>">
+                                        <span class="sub-item">IP Address</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <li class="nav-item <?php echo e(request()->routeIs('aboutonlinetrade') ? 'active' : ''); ?>">
+                    <a href="<?php echo e(url('/admin/dashboard/about')); ?>">
+                        <i class=" fa fa-info-circle" aria-hidden="true"></i>
+                        <p>For More script</p>
+                    </a>
+                </li>
+
+              
+                   
+        
+            </ul>
+Success!
+        </div>
+    </div>
+</div>
+<!-- End Sidebar -->
+<?php /**PATH /home/globalch/public_html/resources/views/admin/sidebar.blade.php ENDPATH**/ ?>
